@@ -1,0 +1,32 @@
+{
+  "name": "spider",
+  "version": "0.1.0",
+  "description": "spider",
+  "main": "app.js",
+  "dependencies": {
+    "async": "^2.1.4",
+    "cheerio": "^0.22.0",
+    "ejs": "^2.5.5",
+    "eventproxy": "^0.3.5",
+    "express": "^4.14.0",
+    "superagent": "^3.3.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kakaxiaoshizi/spider.git"
+  },
+  "keywords": [
+    "nodejs",
+    "spider"
+  ],
+  "author": "slion",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kakaxiaoshizi/spider/issues"
+  },
+  "homepage": "https://github.com/kakaxiaoshizi/spider#readme"
+}

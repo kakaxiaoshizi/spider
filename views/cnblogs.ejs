@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>博客园</title>
+    <style>
+      .title{
+        color:red;
+      }
+      .artic{
+        margin-top:20px;
+      }
+    </style>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+    
+    <div class="container">
+      <h1><span class="title">博客园</h1>
+      <div class="row">
+        <div class="col-lg-6">
+          <select class="form-control" id="cate">
+            <option value="0">请选择分类</option>
+            <% for(var i=0; i<cate.length; i++){ %>
+              <option value="<%= cate[i]%>"><%= cate[i]%></option>
+            <% } %>
+          </select>
+        </div>
+        <div class="col-lg-6">
+          <select class="form-control" id="author">
+            <option value="0">请选择作者</option>
+            <% for(var i=0; i<author.length; i++){ %>
+              <option value="<%= author[i]%>"><%= author[i]%></option>
+            <% } %>
+          </select>
+        </div>
+      </div>
+      
+      <div class="artic">
+        
+      </div>
+    </div>
+
+    <script type="text/template" id="cnblogs">
+      <ul class="list-group">
+          <li class="list-group-item">
+            <a href="{{= href}}" target="_blank">{{= title}}</a>
+      </ul>
+    </script>
+
+    <script src="/js/jquery-1.11.0.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/underscore-min.js"></script>
+
+    <script>
+
+     $(function(){
+
+      $('#cate').on('change', function(){
+       var cate = $(this).val();
+       if(cate == 0) return;
+       $('.artic').html('');
+       $.ajax({
+         url: '/cnblogs/cate/' + cate,
+         type: 'GET',
+         dataType: 'json',
+         success: function(data){
+           var cnblogs = data.cnblogs;
+           for(var i=0; i<cnblogs.length; i++){
+             var compiled = _.template($('#cnblogs').html());
+             var art = compiled(cnblogs[i]);
+             $('.artic').append(art);
+           }
+         }
+       });
+      });
+
+     $('#author').on('change', function(){
+       var author = page_type = $(this).val();
+       if(author == 0) return;
+       $('.artic').html('');
+       $.ajax({
+         url: '/cnblogs/user/' + author,
+         type: 'GET',
+         dataType: 'json',
+         success: function(data){
+           var cnblogs = data.cnblogs;
+           for(var i=0; i<cnblogs.length; i++){
+             var compiled = _.template($('#cnblogs').html());
+             var art = compiled(cnblogs[i]);
+             $('.artic').append(art);
+           }
+         }
+       });
+      });
+     });
+      
+    </script>
+  </body>
+</html>
