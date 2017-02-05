@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>彼岸桌面</title>
+    <style>
+      .title{
+        color:red;
+      }
+      .artic{
+        margin-top:20px;
+      }
+    </style>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+  </head>
+  <body>
+    
+    <div class="container">
+      <h1><span class="title">彼岸桌面壁纸下载</h1>
+      <div class="row">
+        <div class="col-lg-3">
+          <select class="form-control" id="cate">
+            <option value="0">请选择分类</option>
+            <% for(var i=0; i<cate.length; i++){ %>
+              <option value="<%= cate[i].key%>"><%= cate[i].value%></option>
+            <% } %>
+          </select>
+        </div>
+        <div class="col-lg-3">
+          <select class="form-control" id="page">
+            <option value="0">请选择页码</option>
+            <% for(var i=1; i<=page; i++){ %>
+              <option value="<%= i%>"><%= i%></option>
+            <% } %>
+          </select>
+        </div>
+        <div class="col-lg-3">
+          <button type="buttom" id="start" class="btn btn-success">开始</button>
+        </div>
+      </div>
+      
+      <div class="artic">
+        
+      </div>
+    </div>
+
+    <script src="/js/jquery-1.11.0.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script>
+
+      $('#start').on('click', function(){
+       var cate = $('#cate').val();
+       var page = $('#page').val();
+       if(cate == 0 || page == 0){
+        alert('请选择分类或页码');
+        return false;
+       }
+       $('.artic').html('');
+       $.ajax({
+         url: '/netbian/cate_page/?cate=' + cate + '&page=' + page,
+         type: 'GET',
+         // dataType: 'json',
+         success: function(data){
+           $('.artic').append(data);
+         }
+       });
+      });
+    </script>
+  </body>
+</html>

@@ -9,7 +9,9 @@
     "ejs": "^2.5.5",
     "eventproxy": "^0.3.5",
     "express": "^4.14.0",
-    "superagent": "^3.3.2"
+    "iconv-lite": "^0.4.15",
+    "superagent": "^3.3.2",
+    "superagent-charset": "^1.1.1"
   },
   "devDependencies": {},
   "scripts": {
